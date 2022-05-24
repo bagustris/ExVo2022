@@ -1,7 +1,6 @@
 import os
 import audinterface
 import audonnx
-import torchaudio.transforms as T
 
 
 wav_path = '/data/22_ICML-ExVo22_TeamAtmaja_ITSN/wav/'
@@ -9,7 +8,7 @@ files = os.listdir(wav_path)
 
 model_root = "/data/models/w2v2-L-robust/"
 model = audonnx.load(model_root)
-save_dir = "/data/22_ICML-ExVo22_TeamAtmaja_ITSN/feats/w2v2-R-emo/"
+save_dir = "/data/22_ICML-ExVo22_TeamAtmaja_ITSN/feats/w2v2-R-er/"
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir, exist_ok=True)

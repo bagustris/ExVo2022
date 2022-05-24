@@ -48,7 +48,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--directory", help="working directory")
 parser.add_argument("-l", "--labels", help="label file, data_info.csv")
 parser.add_argument("-f", "--features", help="feature type")
-parser.add_argument("-e", "--epochs", default=20, type=int, help="No of Epochs, Baseline 20")
+parser.add_argument("-e", "--epochs", default=50, type=int, help="No of Epochs, Baseline 20")
 parser.add_argument("-lr", "--learningrate", default=0.001, type=float, help="Learning rate, Baseline 0.001")
 parser.add_argument("-bs", "--batchsize", default=8, type=int, help="Batch Size, Baseline 8")
 parser.add_argument("-p", "--patience", default=5, type=int, help="Early stopping patience, Baseline 5")
@@ -56,7 +56,7 @@ parser.add_argument("-tn", "--teamname", type=str, default='Baseline', help="Nam
 parser.add_argument("--store_pred", action="store_true", help="Store test set predictions")
 parser.add_argument("--save_csv", action="store_true", help="store overview of results")
 parser.add_argument("--pltloss", action="store_true", help="plot training loss")
-parser.add_argument("--n_seeds", type=int, default=3,choices=range(1, 6),help="number of seeds to try (default: 3, max: 6).")
+parser.add_argument("--n_seeds", type=int, default=3,choices=range(1, 21),help="number of seeds to try (default: 3, max: 20).")
 args = parser.parse_args()
 
 
@@ -83,7 +83,7 @@ def baseline(
     val_result, loss_res, val_loss_res = [], [], []
 
     model = MultiTask(feat_dimensions).to(dev)
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=0.0001)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=0.001)
 
     inputs = torch.from_numpy(X[0].astype(np.float32)).to(dev)
     val_inputs = torch.from_numpy(X[1].astype(np.float32)).to(dev)
@@ -300,7 +300,7 @@ def main():
 
     hmean_list, ccc_list, uar_list, mae_list = [], [], [], []
 
-    seed_list = [101,102,103,104,105,106]
+    seed_list = [42]
     seed_list = random.sample(seed_list, args.n_seeds)
     for seed in seed_list:
         print(f"Running Model for {len(seed_list)} seeds")

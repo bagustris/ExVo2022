@@ -7,21 +7,20 @@
 import argparse
 import warnings
 import os
-import csv
+# import csv
 import time
 import pandas as pd
 import numpy as np
-from tqdm import tqdm
+# from tqdm import tqdm
 import random
 from pathlib import Path
 
-from scipy import stats
+# from scipy import stats
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn import preprocessing
 from scipy.stats import hmean
 
 import torch
-import torch.optim as optim
 import torch.nn as nn
 
 if torch.cuda.is_available():
@@ -48,10 +47,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-d", "--directory", help="working directory")
 parser.add_argument("-l", "--labels", help="label file, data_info.csv")
 parser.add_argument("-f", "--features", help="feature type")
-parser.add_argument("-e", "--epochs", default=50, type=int, help="No of Epochs, Baseline 20")
+parser.add_argument("-e", "--epochs", default=20, type=int, help="No of Epochs, Baseline 20")
 parser.add_argument("-lr", "--learningrate", default=0.001, type=float, help="Learning rate, Baseline 0.001")
 parser.add_argument("-bs", "--batchsize", default=8, type=int, help="Batch Size, Baseline 8")
-parser.add_argument("-p", "--patience", default=5, type=int, help="Early stopping patience, Baseline 5")
+parser.add_argument("-p", "--patience", default=5, type=int, help="Early stopping patience, Baseline= 5")
 parser.add_argument("-tn", "--teamname", type=str, default='Baseline', help="Name of team")
 parser.add_argument("--store_pred", action="store_true", help="Store test set predictions")
 parser.add_argument("--save_csv", action="store_true", help="store overview of results")
@@ -79,11 +78,15 @@ def baseline(
 ):
     print(f"Running experiments with {feature_type}")
     lmse, lclass = nn.MSELoss(), nn.CrossEntropyLoss()
-    es_delta = 0.1
+    es_delta = 0.01
     val_result, loss_res, val_loss_res = [], [], []
 
     model = MultiTask(feat_dimensions).to(dev)
-    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=0.001)
+    optimizer = torch.optim.AdamW(
+        model.parameters(),
+        lr=lr,
+        weight_decay=0.0001
+    )
 
     inputs = torch.from_numpy(X[0].astype(np.float32)).to(dev)
     val_inputs = torch.from_numpy(X[1].astype(np.float32)).to(dev)

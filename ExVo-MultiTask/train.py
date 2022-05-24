@@ -7,8 +7,8 @@
 import torch
 import numpy as np
 from sklearn import preprocessing
-from utils import EarlyStopping, EvalMetrics
-from sklearn.metrics import recall_score, mean_squared_error, mean_absolute_error
+from utils import EvalMetrics
+from sklearn.metrics import recall_score, mean_absolute_error
 
 if torch.cuda.is_available():
     dev = torch.device("cuda:0")

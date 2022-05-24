@@ -46,7 +46,9 @@ class Dataloader:
             "openXBOW/1000": [",", None, 1, 1000],
             "openXBOW/2000": [",", None, 1, 2000],
             "w2v2-R-emo": [",", "infer", 1, 1024],
+            "w2v2-R-emo-norm": [",", "infer", 1, 1024],
             "w2v2-R-emo-vad": [",", "infer", 1, 1027],
+            
         }
 
         sep_type = feat_dict[feature_type][0]
@@ -159,6 +161,7 @@ class Dataloader:
             "openXBOW/1000": [",", None, 1, 1000],
             "openXBOW/2000": [",", None, 1, 2000],
             "w2v2-R-emo": [",", "infer", 1, 1024],
+            "w2v2-R-emo-norm": [",", "infer", 1, 1024],
             "w2v2-R-emo-vad": [",", "infer", 1, 1027],
         }
 

@@ -7,6 +7,7 @@
 import torch
 import torch.nn as nn
 
+
 class MultiTask(nn.Module):
     def __init__(self, feat_dimensions):
         super().__init__()
@@ -21,18 +22,38 @@ class MultiTask(nn.Module):
                                     nn.LeakyReLU())
         
         self.emotion_layer = nn.Sequential(
-            nn.Linear(64, 32), nn.LeakyReLU(), nn.Linear(32, 10)
+            nn.Linear(64, 32), 
+            nn.LeakyReLU(), 
+            # nn.Linear(32, 16), 
+            # nn.LeakyReLU(), 
+            nn.Linear(32, 10)
         )
 
         self.age_layer = nn.Sequential(
-            nn.Linear(64, 32), nn.LeakyReLU(), nn.Linear(32, 1)
+            nn.Linear(64, 32), 
+            nn.LeakyReLU(), 
+            nn.Linear(32, 16), 
+            nn.LeakyReLU(),
+            # nn.Linear(16, 8), 
+            # nn.LeakyReLU(), 
+            # nn.Linear(8, 4),
+            # nn.LeakyReLU(),
+            nn.Linear(16, 1), 
         )
 
         self.country_layer = nn.Sequential(
-            nn.Linear(64, 32), nn.LeakyReLU(), nn.Linear(32, 4)
+            nn.Linear(64, 32), 
+            nn.LeakyReLU(), 
+            # nn.Linear(32, 16),
+            nn.LeakyReLU(), 
+            # nn.Linear(16, 8),
+            # nn.LeakyReLU(), 
+            nn.Linear(32, 4)
         )
-
-        self.logsigma = nn.Parameter(torch.FloatTensor([-0.33, -0.33, -0.33]))
+        alpha = 0.33
+        beta = 0.33
+        gamma = round(1 - alpha - beta, 2)
+        self.logsigma = nn.Parameter(torch.FloatTensor([-alpha, -beta, -gamma]))
 
     def forward(self, x):
         h_shared = self.share_layer(x)

@@ -3,12 +3,12 @@ import audinterface
 import audonnx
 
 
-wav_path = '/data/22_ICML-ExVo22_TeamAtmaja_ITSN/wav/'
+wav_path = '/data/22_ICML-ExVo22_TeamAtmaja_ITSN/wav_norm/'
 files = os.listdir(wav_path)
 
 model_root = "/data/models/w2v2-L-robust/"
 model = audonnx.load(model_root)
-save_dir = "/data/22_ICML-ExVo22_TeamAtmaja_ITSN/feats/w2v2-R-er/"
+save_dir = "/data/22_ICML-ExVo22_TeamAtmaja_ITSN/feats/w2v2-R-emo-norm/"
 
 if not os.path.exists(save_dir):
     os.makedirs(save_dir, exist_ok=True)

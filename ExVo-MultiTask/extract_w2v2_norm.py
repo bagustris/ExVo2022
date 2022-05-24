@@ -4,7 +4,7 @@ import audonnx
 # import torchaudio.transforms as T
 
 
-wav_path = '/data/22_ICML-ExVo22_TeamAtmaja_ITSN/wav_norm/'
+wav_path = '/data/22_ICML-ExVo22_TeamAtmaja_ITSN/wav/'
 files = os.listdir(wav_path)
 
 model_root = "/data/models/w2v2-L-robust/"

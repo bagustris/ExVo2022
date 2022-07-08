@@ -50,3 +50,11 @@ In `main.py`, `store_predictions()` can be used to create the needed predicition
 |[58712]| 1     |32.2 |0.109 |0.258     | 0.159   |0.181      |0.605  |0.591 |0.462   |0.071  |0.160  |0.520   |
 
 Each team will have 5 submission oppurtunties to submit their predictions to `competitions@hume.ai`
+
+## Avaliable Features
+xxx  
+xxx 
+
+## Test results (S_mtl:feature, seed)
+1. XXX
+2. XXX

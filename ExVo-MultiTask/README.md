@@ -20,6 +20,8 @@ _Baseline_
 
 ```
   python3 main.py -d ../ -l data_info.csv -f eGeMAPS -tn Baseline --store_pred --save_csv --n_seeds 5 --pltloss
+  # or specific for my in my PC
+  python3 main.py -d /data/22_ICML-ExVo22_TeamAtmaja_ITSN/ -l data_info.csv -f w2v2-R-emo-vad -tn TeamAtmaja --store_pred --save_csv -bs 2
 ```
 
 | Option         | Description                                  |
@@ -51,10 +53,16 @@ In `main.py`, `store_predictions()` can be used to create the needed predicition
 
 Each team will have 5 submission oppurtunties to submit their predictions to `competitions@hume.ai`
 
-## Avaliable Features
-xxx  
-xxx 
+## Additonal Features
+```
+w2v2-R-emo
+w2v2-R-emo-norm
+w2v2-R-emo-vad
+w2v2-R-emo-vad-norm
+```
+
 
 ## Test results (S_mtl:feature, seed)
-1. XXX
-2. XXX
+1. 0.358 (w2v2-R-emo, 2, 8)
+2. 0.378 (w2v2-R-emo, 106, 4)
+3. XXX (w2v2-R-emo-vad, 106, 2)
